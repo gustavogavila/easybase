@@ -1,14 +1,16 @@
 package com.antpatterns.easybase.controllers;
 
+import br.com.mv.equery.port.PageFilter;
 import com.antpatterns.easybase.business.UsuarioBusiness;
-import com.antpatterns.easybase.model.Usuario;
 import com.antpatterns.easybase.model.UsuarioRequest;
+import com.antpatterns.easybase.model.UsuarioResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collection;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -23,8 +25,7 @@ public class UsuarioController {
   }
 
   @GetMapping
-  public ResponseEntity<Iterable<Usuario>> get() {
-    return ResponseEntity.ok(usuarioBusiness.get());
+  public ResponseEntity<Iterable<UsuarioResponse>> get(Map<PageFilter, String> params, Pageable pageable) {
+    return ResponseEntity.ok(usuarioBusiness.get(params, pageable));
   }
-
 }
