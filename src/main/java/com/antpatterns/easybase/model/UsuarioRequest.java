@@ -1,6 +1,7 @@
 package com.antpatterns.easybase.model;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class UsuarioRequest {
 
@@ -12,6 +13,10 @@ public class UsuarioRequest {
 
   @NotBlank
   private String email;
+
+  @NotBlank
+  @Size(min = 6)
+  private String senha;
 
   public String getNome() {
     return nome;
@@ -36,4 +41,18 @@ public class UsuarioRequest {
   public void setEmail(String email) {
     this.email = email;
   }
+
+  public String getSenha() {
+    return senha;
+  }
+
+  public void setSenha(String senha) {
+    this.senha = senha;
+  }
+
+  public Usuario toUsuario() {
+    final Usuario usuario = new Usuario();
+    return usuario;
+  }
+
 }
