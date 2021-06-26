@@ -10,18 +10,33 @@ import org.springframework.data.domain.Pageable;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CompoundSelection;
 import java.util.Map;
 
 public class UsuarioCustomRepositoryImpl implements UsuarioCustomRepository{
 
   @Autowired
   private EntityManager entityManager;
+  private final UsuarioCustomFilter customFilter;
+
+  public UsuarioCustomRepositoryImpl() {
+    this.customFilter = UsuarioCustomFilter.init();
+  }
 
   @Override
   public Page<UsuarioResponse> buscarTodos(Map<PageFilter, String> params, Pageable pageable) {
     final AbstractCriteriaSpecification specification = defaultCriteria();
+    customFilter.builderQuery(params, specification);
+    CompoundSelection<UsuarioResponse> compound = resumeCompound(specification);
+    return specification.select(compound, pageable);
+  }
 
-    return null;
+  private CompoundSelection<UsuarioResponse> resumeCompound(AbstractCriteriaSpecification specification) {
+    return specification.builder().construct(
+            UsuarioResponse.class,
+            specification.root().get("id"),
+            specification.root().get("nome")
+    );
   }
 
   private AbstractCriteriaSpecification defaultCriteria() {

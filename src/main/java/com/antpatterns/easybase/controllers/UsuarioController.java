@@ -5,6 +5,7 @@ import com.antpatterns.easybase.business.UsuarioBusiness;
 import com.antpatterns.easybase.model.UsuarioRequest;
 import com.antpatterns.easybase.model.UsuarioResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class UsuarioController {
   }
 
   @GetMapping
-  public ResponseEntity<Iterable<UsuarioResponse>> get(Map<PageFilter, String> params, Pageable pageable) {
+  public ResponseEntity<Page<UsuarioResponse>> get(@RequestParam Map<PageFilter, String> params, Pageable pageable) {
     return ResponseEntity.ok(usuarioBusiness.get(params, pageable));
   }
 }

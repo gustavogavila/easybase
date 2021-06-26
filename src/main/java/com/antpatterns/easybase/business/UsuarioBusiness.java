@@ -5,6 +5,7 @@ import com.antpatterns.easybase.model.UsuarioRequest;
 import com.antpatterns.easybase.model.UsuarioResponse;
 import com.antpatterns.easybase.repositorio.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class UsuarioBusiness {
     repository.save(request.toUsuario());
   }
 
-  public Iterable<UsuarioResponse> get(Map<PageFilter, String> params, Pageable pageable) {
-    return repository.findAll();
+  public Page<UsuarioResponse> get(Map<PageFilter, String> params, Pageable pageable) {
+    return repository.buscarTodos(params, pageable);
   }
 }

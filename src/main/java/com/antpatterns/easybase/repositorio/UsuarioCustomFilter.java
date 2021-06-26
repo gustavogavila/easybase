@@ -22,7 +22,13 @@ public class UsuarioCustomFilter extends RepositoryFilterSpecSimple {
         super(new HashMap<>());
     }
 
-    private void init() {
+    public static UsuarioCustomFilter init() {
+        UsuarioCustomFilter usuarioCustomFilter = new UsuarioCustomFilter();
+        usuarioCustomFilter.build();
+        return usuarioCustomFilter;
+    }
+
+    private void build() {
         super.getRules().put(NOME, (filters) -> RepositoryFilterBuilder
                 .init(NOME, super.fetch(filters, CustomPageFilter.nome))
                 .withOperation(SearchOperation.MATCH));
