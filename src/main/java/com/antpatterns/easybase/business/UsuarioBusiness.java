@@ -15,9 +15,8 @@ public class UsuarioBusiness {
         this.repository = repository;
     }
 
-    public void criar(UsuarioRequest usuario) {
-
+    public void criar(UsuarioRequest request) {
+        repository.save(request.toUsuario());
     }
-
 
 }
