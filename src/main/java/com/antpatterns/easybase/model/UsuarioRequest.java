@@ -3,6 +3,7 @@ package com.antpatterns.easybase.model;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.Instant;
+import java.util.UUID;
 
 public class UsuarioRequest {
 
@@ -53,6 +54,7 @@ public class UsuarioRequest {
 
   public Usuario toUsuario() {
     final Usuario usuario = new Usuario();
+    usuario.setId(UUID.randomUUID().toString());
     usuario.setNome(nome);
     usuario.setSobrenome(sobrenome);
     usuario.setEmail(email);

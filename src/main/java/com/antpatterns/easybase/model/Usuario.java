@@ -3,13 +3,14 @@ package com.antpatterns.easybase.model;
 import javax.persistence.*;
 import javax.validation.constraints.PastOrPresent;
 import java.time.Instant;
+import java.util.UUID;
 
 @Entity
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
     @Column
     private String nome;
@@ -27,8 +28,12 @@ public class Usuario {
     @PastOrPresent
     private Instant criadoEm;
 
-    public Integer getId() {
+    public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -49,10 +54,6 @@ public class Usuario {
 
     public Instant getCriadoEm() {
         return criadoEm;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public void setNome(String nome) {
