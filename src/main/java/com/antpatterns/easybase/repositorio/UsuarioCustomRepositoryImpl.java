@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CompoundSelection;
 import java.util.Map;
 
-public class UsuarioCustomRepositoryImpl implements UsuarioCustomRepository{
+public class UsuarioCustomRepositoryImpl implements UsuarioCustomRepository {
 
   @Autowired
   private EntityManager entityManager;
@@ -32,16 +31,12 @@ public class UsuarioCustomRepositoryImpl implements UsuarioCustomRepository{
   }
 
   private CompoundSelection<UsuarioResponse> resumeCompound(AbstractCriteriaSpecification specification) {
-    return specification.builder().construct(
-            UsuarioResponse.class,
-            specification.root().get("id"),
-            specification.root().get("nome")
+    return specification.builder().construct(UsuarioResponse.class, specification.root().get("id"), specification.root().get("nome"), specification.root().get("sobrenome"), specification.root().get("email")
     );
   }
 
   private AbstractCriteriaSpecification defaultCriteria() {
-    return AbstractCriteriaSpecification.init(entityManager)
-            .initWithClazzs(Usuario.class, UsuarioResponse.class, null);
+    return AbstractCriteriaSpecification.init(entityManager).initWithClazzs(Usuario.class, UsuarioResponse.class, null);
   }
 
 }

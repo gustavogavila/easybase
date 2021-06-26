@@ -16,9 +16,11 @@ public class UsuarioResponse {
   public UsuarioResponse() {
   }
 
-  public UsuarioResponse(String id, String nome) {
+  public UsuarioResponse(String id, String nome, String sobrenome, String email) {
     this.id = id;
     this.nome = nome;
+    this.sobrenome = sobrenome;
+    this.email = email;
   }
 
   public String getId() {

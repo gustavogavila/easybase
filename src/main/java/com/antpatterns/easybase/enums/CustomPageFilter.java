@@ -5,5 +5,6 @@ import br.com.mv.equery.port.PageFilter;
 public enum CustomPageFilter implements PageFilter {
     nome,
     sobrenome,
-    email
+    email,
+    bairro
 }
